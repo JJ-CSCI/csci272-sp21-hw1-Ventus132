@@ -1,103 +1,80 @@
-
-
-
-
-class Binomial {        // The class
-          // Access specifier
-
-  private:
-    float Coefficient1 = 1.0;  // Attribute
-    float Coefficient2 = 1.0;  // Attribute
-    int Power1 = 1; 
-    int Power2 = 1;     // Attribute
-
+#ifndef Binomial_h
+#define Binomial_h
+class Binomial {
+private:
+  float coef[3] {0, 1.0, 1.0};
+  int pow[3] {0, 1, 1};
 public:
-//b(float x, float y, int z, int q) {
-Binomial(float x, float y ){ // Constructor with parameters
- 
-Coefficient1 = x;
-Coefficient2 = y;
-Power1 = 1;
-Power2 = 1;
+  Binomial() {
+    coef[1] = 1.0;
+    coef[2] = 1.0;
+    pow[1] = 1;
+    pow[2] = 1;
+  }
 
-/*
-  if (z < 1){
-    Power1 = 1;
-    }
-    else{
-    Power1 = z;
-    }
-
+  Binomial(float x) {
+    coef[1] = x;
+    coef[2] = 1.0;
+    pow[1] = 1;
+    pow[2] = 1;
+  }
   
+  Binomial(float x, int y) {
+    coef[2] = 1.0;
+    pow[2] = 1;
+    coef[1] = x;
 
-    if (z < 1){
-    Power2 = 1;
+    if (y < 1){
+      pow[1] = 1;
     }
-    else{
-    Power2 = q;
+    else
+    pow[1] = y;
+  }
+
+  Binomial(float x, int y, float a) {
+    pow[2] = 1;
+    coef[1] = x;
+    coef[2] =a;
+
+    if (y < 1){
+      pow[1] = 1;
     }
+    else
+    pow[1] = y;
+  }
 
-*/
-}
+  Binomial(float x, int a, float y, int b) {
+  coef[1] = x;
+  coef[2] =y;
 
-    //}
+  if((a < 1) && (b < 1)){
+    pow[1] = 1;
+    pow[2] = 1;
+  }
+  else if ((a < 1) && (b >= 1)){
+    pow[1] = 1;
+    pow[2] = b;
+  }
+  else if ((a >= 1) && (b < 1)){
+    pow[1] = a;
+    pow[2] = 1;
+  }
+  else{
+  pow[1] = a;
+  pow[2] = b;
+  }
+  }
+  
+  int GetPower(int i);
 
-      float GetCoefficient(int x);
-      
-      /*{
-      if (x == 1){
-        return  Coefficient1;
-      } 
-        
-      else if (x == 2){
-        return Coefficient2;
-      } 
-      else{
-        return -1;
-      }
+  float GetCoefficient(int m);
 
-    }*/
+  int SetPower(int e, int f);
 
+  int Add(Binomial x);
 
+  void Multiply(float x);
 
-    int GetPower(float x);
-    /*{
-
-      if (x == 1){
-        return  Power1;
-      } 
-        
-      else if (x == 2){
-        return Power2;
-      } 
-      else{
-        return -1;
-      }
-    }*/
-
-    int SetPower (int x);
-    /*{
-      if(x != 1){
-        Power1 = 1;
-        Power2 = 1;
-      }
-      else if{
-        return 0;
-      }
-      else{
-        return -1;
-      }
-    }*/
-
-    int Add (int x , int y);
-
-    int Multiply (int num , int mono);
-
-    int Multiply (float num , int mono);
-
-
-
-  };
-
-
-
+  void Multiply(float x, int y);
+};
+#endif

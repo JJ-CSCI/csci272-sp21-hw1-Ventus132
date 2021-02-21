@@ -1,95 +1,80 @@
+
 #include "binomial.h"
-
-//file binomial.cpp
-/*
-Binomial::Binomial(float x, float y ) // Constructor with parameters
-{ 
-Coefficient1 = x;
-Coefficient2 = y;
-Power1 = 1;
-Power2 = 1;
-*/
-
-/*
-  if (z < 1){
-    Power1 = 1;
-    }
-    else{
-    Power1 = z;
-    }
+#include "catch.hpp"
 
   
+  
+  int Binomial::GetPower(int i) {
+    if (pow[i] == pow[1])
+    return pow[1];
+    if (pow[i] == pow[2])
+    return pow[2];
+    else
+    return -1;
+  }
 
-    if (z < 1){
-    Power2 = 1;
+  float Binomial::GetCoefficient(int m) {
+    if (coef[m] == coef[1])
+    return coef[1];
+    if (coef[m] == coef[2])
+    return coef[2];
+    else
+    return -1;
+  }
+
+  int Binomial::SetPower(int e, int f){
+
+    if (((e == 1) || (e == 2)) && (f >= 0)){
+      pow[e] = f;
+      return 0;
     }
-    else{
-    Power2 = q;
+    else if ((f < 0) && ((e == 1) || (e == 2))){
+      pow[e] = 1;
+      return 0;
     }
-*/
-
-/*
-Binomial::Binomial(float Coefficient1, float Coefficient2 ){
-
-}*/
-
-
- float Binomial::GetCoefficient(int x)
-   {
-      if (x == 1){
-        return  Coefficient1;
-      } 
-        
-      else if (x == 2){
-        return Coefficient2;
-      } 
-      else{
-        return -1;
-      }
-
-
- }
-
-int Binomial::GetPower(float x)
-  {
-
-      if (x == 1){
-        return  Power1;
-      } 
-        
-      else if (x == 2){
-        return Power2;
-      } 
-      else{
-        return -1;
-      }
-}
-
-int Binomial::SetPower (int x)
-  {
-      if(x != 1){
-        Power1 = 1;
-        Power2 = 1;
-      }
-      else if(x == 1){
-        return 0;
-      }
-      else{
-        return -1;
-      }
+    else if (((e != 1) || (e != 2)) && (f >= 0)){
+      pow[1] = pow[1];
+      pow[2] = pow[2];
+      return -1;
     }
-
-
-    int Binomial::Add (int x , int y){
-
+    else if (((e != 1) || (e != 2)) && (f < 0)){
+      pow[1] = pow[1];
+      pow[2] = pow[2];
+      return -1;
     }
+    else
+    return -1;
+  }
 
-    int Binomial::Multiply (int num , int mono){
+  int Binomial::Add(Binomial x) {
 
+    if (pow[1] != x.pow[1]){
+      return -1;
     }
-
-    int Binomial::Multiply (float num , int mono){
-
+    else if ((pow[1] == x.pow[1]) && (pow[2] != x.pow[2])){
+      coef[1] = coef[1] + x.coef[1];
+      return 0;
     }
+    else if ((pow[1] == x.pow[1]) && (pow[2] == x.pow[2])){
+      coef[1] = coef[1] + x.coef[1];
+      coef[2] = coef[2] + x.coef[2];
+      return 0;
+    }
+    else
+    return -1;
+  }
+
+  void Binomial::Multiply(float x) {
+    coef[1] = coef[1] * x;
+    pow[1] = pow[1];
+    coef[2] = coef[2] * x;
+    pow[2] = pow[2];
+  }
+  void Binomial::Multiply(float x, int y) {
+    coef[1] = coef[1] * x;
+    pow[1] = pow[1] + y;
+    coef[2] = coef[2] * x;
+    pow[2] = pow[2] + y;
+  }
 
 
