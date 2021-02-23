@@ -1,44 +1,42 @@
 #include "binomial.h"
 #include "catch.hpp"
 
-  
-  
   int Binomial::GetPower(int i) {
-    if (pow[i] == pow[1])
-    return pow[1];
-    if (pow[i] == pow[2])
-    return pow[2];
+    if (power[i] == power[1])
+    return power[1];
+    if (power[i] == power[2])
+    return power[2];
     else
     return -1;
   }
 
   float Binomial::GetCoefficient(int m) {
-    if (coef[m] == coef[1])
-    return coef[1];
-    if (coef[m] == coef[2])
-    return coef[2];
+    if (coefficient[m] == coefficient[1])
+    return coefficient[1];
+    if (coefficient[m] == coefficient[2])
+    return coefficient[2];
     else
     return -1;
   }
 
-  int Binomial::SetPower(int e, int f){
+  int Binomial::SetPower(int n, int d){
 
-    if (((e == 1) || (e == 2)) && (f >= 0)){
-      pow[e] = f;
+    if (((n == 1) || (n == 2)) && (d >= 0)){
+      power[n] = d;
       return 0;
     }
-    else if ((f < 0) && ((e == 1) || (e == 2))){
-      pow[e] = 1;
+    else if ((d < 0) && ((n == 1) || (n == 2))){
+      power[n] = 1;
       return 0;
     }
-    else if (((e != 1) || (e != 2)) && (f >= 0)){
-      pow[1] = pow[1];
-      pow[2] = pow[2];
+    else if (((n != 1) || (n != 2)) && (d >= 0)){
+      power[1] = power[1];
+      power[2] = power[2];
       return -1;
     }
-    else if (((e != 1) || (e != 2)) && (f < 0)){
-      pow[1] = pow[1];
-      pow[2] = pow[2];
+    else if (((n != 1) || (n != 2)) && (d < 0)){
+      power[1] = power[1];
+      power[2] = power[2];
       return -1;
     }
     else
@@ -47,16 +45,16 @@
 
   int Binomial::Add(Binomial x) {
 
-    if (pow[1] != x.pow[1]){
+    if (power[1] != x.power[1]){
       return -1;
     }
-    else if ((pow[1] == x.pow[1]) && (pow[2] != x.pow[2])){
-      coef[1] = coef[1] + x.coef[1];
+    else if ((power[1] == x.power[1]) && (power[2] != x.power[2])){
+      coefficient[1] = coefficient[1] + x.coefficient[1];
       return 0;
     }
-    else if ((pow[1] == x.pow[1]) && (pow[2] == x.pow[2])){
-      coef[1] = coef[1] + x.coef[1];
-      coef[2] = coef[2] + x.coef[2];
+    else if ((power[1] == x.power[1]) && (power[2] == x.power[2])){
+      coefficient[1] = coefficient[1] + x.coefficient[1];
+      coefficient[2] = coefficient[2] + x.coefficient[2];
       return 0;
     }
     else
@@ -64,16 +62,16 @@
   }
 
   void Binomial::Multiply(float x) {
-    coef[1] = coef[1] * x;
-    pow[1] = pow[1];
-    coef[2] = coef[2] * x;
-    pow[2] = pow[2];
+    coefficient[1] = coefficient[1] * x;
+    power[1] = power[1];
+    coefficient[2] = coefficient[2] * x;
+    power[2] = power[2];
   }
   void Binomial::Multiply(float x, int y) {
-    coef[1] = coef[1] * x;
-    pow[1] = pow[1] + y;
-    coef[2] = coef[2] * x;
-    pow[2] = pow[2] + y;
+    coefficient[1] = coefficient[1] * x;
+    power[1] = power[1] + y;
+    coefficient[2] = coefficient[2] * x;
+    power[2] = power[2] + y;
   }
 
 
