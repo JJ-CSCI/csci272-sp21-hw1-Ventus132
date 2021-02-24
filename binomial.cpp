@@ -1,6 +1,7 @@
 #include "binomial.h"
 #include "catch.hpp"
 
+
   int Binomial::GetPower(int i) {
     if (power[i] == power[1])
     return power[1];
@@ -11,13 +12,14 @@
   }
 
   float Binomial::GetCoefficient(int m) {
-    if (coefficient[m] == coefficient[1])
+  if (m == 1)
     return coefficient[1];
-    if (coefficient[m] == coefficient[2])
+
+  else if (m == 2)
     return coefficient[2];
-    else
+  else
     return -1;
-  }
+}
 
   int Binomial::SetPower(int n, int d){
 
@@ -43,23 +45,16 @@
     return -1;
   }
 
-  int Binomial::Add(Binomial x) {
 
-    if (power[1] != x.power[1]){
-      return -1;
-    }
-    else if ((power[1] == x.power[1]) && (power[2] != x.power[2])){
-      coefficient[1] = coefficient[1] + x.coefficient[1];
-      return 0;
-    }
-    else if ((power[1] == x.power[1]) && (power[2] == x.power[2])){
-      coefficient[1] = coefficient[1] + x.coefficient[1];
-      coefficient[2] = coefficient[2] + x.coefficient[2];
-      return 0;
-    }
-    else
+int Binomial::Add(const Binomial& x) {
+  if (power[1] == x.power[1] && power[2] == x.power[2]) {
+    this->coefficient[1] += x.coefficient[1];
+    this->coefficient[2] += x.coefficient[2];
+    return 0;
+  } else
     return -1;
-  }
+}
+
 
   void Binomial::Multiply(float x) {
     coefficient[1] = coefficient[1] * x;
